@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TransactionTypeBadge } from "./type-badge";
 import { Button } from "@/app/_components/ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
+import EditTransactionButton from "./edit-transaction-button";
 
 export const TRANSACTION_CATEGORY_LABELS = {
   EDUCATION: "Educação",
@@ -76,16 +77,10 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "actions",
     header: "Ações",
-    cell: () => {
+    cell: ({ row: { original } }) => {
       return (
         <div className="space-x-1">
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className="text-muted-foreground"
-          >
-            <PencilIcon />
-          </Button>
+          <EditTransactionButton transaction={original} />
           <Button
             variant={"ghost"}
             size={"icon"}
