@@ -11,7 +11,7 @@ const AddTransactionButton = () => {
   return (
     <>
       <Button
-        className="rounded-full font-bold"
+        className="rounded-full font-bold text-white"
         onClick={() => setDialogIsOpen(true)}
       >
         Adicionar transação
