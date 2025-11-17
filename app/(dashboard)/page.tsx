@@ -8,6 +8,7 @@ import LastTransactions from "./_components/last-transactions";
 import { NavBar } from "../_components/navbar";
 import { TimeSelect } from "./_components/time-select";
 import SummaryCards from "./_components/sumary-cards";
+import { canUserAddTransaction } from "../_data/can-user-add-transaction";
 
 interface HomeProps {
   searchParams: Promise<{
@@ -27,8 +28,7 @@ const Home = async ({ searchParams }: HomeProps) => {
     redirect(`?month=${new Date().getMonth() + 1}`);
   }
   const dashboard = await getDashboard(month);
-
-  console.log(dashboard);
+  const uerCanAddTransaction = await canUserAddTransaction();
 
   return (
     <>
@@ -40,7 +40,11 @@ const Home = async ({ searchParams }: HomeProps) => {
         </div>
         <div className="grid h-full grid-cols-[2fr_1fr] gap-6 overflow-hidden">
           <div className="flex h-[calc(100vh-190px)] flex-col gap-6 overflow-hidden">
-            <SummaryCards month={month} {...dashboard} />
+            <SummaryCards
+              canAddTransaction={uerCanAddTransaction}
+              month={month}
+              {...dashboard}
+            />
             <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
               <TransactionsPieChart {...dashboard} />
               <ExpensesPerCategory
