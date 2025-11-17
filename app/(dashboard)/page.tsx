@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { dark } from "@clerk/themes";
 import { redirect } from "next/navigation";
-import { NavBar } from "./_components/navbar";
+import { NavBar } from "../_components/navbar";
 
 export default async function Home() {
   const { userId } = await auth();
