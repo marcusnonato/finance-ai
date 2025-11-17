@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { TransactionTypeBadge } from "./type-badge";
 import { Button } from "@/app/_components/ui/button";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
 import EditTransactionButton from "./edit-transaction-button";
 
 export const TRANSACTION_CATEGORY_LABELS = {
