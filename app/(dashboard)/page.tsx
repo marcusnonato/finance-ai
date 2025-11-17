@@ -1,11 +1,26 @@
-import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { dark } from "@clerk/themes";
 import { redirect } from "next/navigation";
 import { NavBar } from "../_components/navbar";
+import { SumarryCards } from "./_components/sumary-cards";
+import { TimeSelect } from "./_components/time-select";
+import { isMatch } from "date-fns";
 
-export default async function Home() {
+interface HomeProps {
+  searchParams: Promise<{
+    month: string;
+  }>;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { month } = await searchParams;
+
   const { userId } = await auth();
+
+  const monthIsInvalid = !month || !isMatch(month, "MM");
+
+  if (monthIsInvalid) {
+    redirect("?month=01");
+  }
 
   if (!userId) {
     redirect("/login");
@@ -14,13 +29,12 @@ export default async function Home() {
   return (
     <>
       <NavBar />
-      <div className="flex min-h-screen items-center justify-center">
-        <UserButton
-          showName
-          appearance={{
-            theme: dark,
-          }}
-        />
+      <div className="space-y-6 p-6">
+        <div className="flex justify-between">
+          <h1>Dashboard</h1>
+          <TimeSelect />
+        </div>
+        <SumarryCards month={month} />
       </div>
     </>
   );
