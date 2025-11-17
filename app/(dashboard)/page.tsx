@@ -39,7 +39,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           <TimeSelect />
         </div>
         <div className="grid h-full grid-cols-[2fr_1fr] gap-6 overflow-hidden">
-          <div className="flex flex-col gap-6 overflow-hidden">
+          <div className="flex h-[calc(100vh-190px)] flex-col gap-6 overflow-hidden">
             <SummaryCards month={month} {...dashboard} />
             <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
               <TransactionsPieChart {...dashboard} />
