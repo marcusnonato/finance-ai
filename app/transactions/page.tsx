@@ -19,17 +19,16 @@ async function TransactionsPage() {
   });
 
   return (
-    <>
-      <div className="h-screen space-y-6 overflow-hidden p-6">
+    <div className="flex h-screen flex-col">
+      <NavBar />
+      <div className="flex flex-1 flex-col space-y-6 overflow-hidden p-6">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transaçôes</h1>
           <AddTransactionButton />
         </div>
-        <ScrollArea className="h-[calc(100vh-100px)]">
-          <DataTable columns={transactionsColumns} data={transactions} />
-        </ScrollArea>
+        <DataTable columns={transactionsColumns} data={transactions} />
       </div>
-    </>
+    </div>
   );
 }
 
