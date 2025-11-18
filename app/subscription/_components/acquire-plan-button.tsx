@@ -29,7 +29,7 @@ const AcquirePlanButton = () => {
   }
   return (
     <Button
-      className="w-full rounded-full font-bold"
+      className="w-full rounded-full font-bold text-white"
       onClick={handleAcquirePlanClick}
     >
       Adquirir plano
