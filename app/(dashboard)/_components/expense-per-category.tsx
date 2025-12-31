@@ -23,18 +23,24 @@ const ExpensesPerCategory = ({
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {expensesPerCategory.map((category) => (
-          <div key={category.category} className="space-y-2">
-            <div className="flex w-full justify-between">
-              <p className="text-sm font-bold">
-                {TRANSACTION_CATEGORY_LABELS[category.category]}
-              </p>
-              <p className="text-sm font-bold">{category.percentageOfTotal}%</p>
+        {expensesPerCategory.length === 0 ? (
+          <p className="text-muted-foreground text-center py-8">
+            Nenhum gasto registrado neste período.
+          </p>
+        ) : (
+          expensesPerCategory.map((category) => (
+            <div key={category.category} className="space-y-2">
+              <div className="flex w-full justify-between">
+                <p className="text-sm font-bold">
+                  {TRANSACTION_CATEGORY_LABELS[category.category]}
+                </p>
+                <p className="text-sm font-bold">{category.percentageOfTotal}%</p>
+              </div>
+              <Progress value={category.percentageOfTotal} />
+              <p>{formatCurrency(category.totalAmount)}</p>
             </div>
-            <Progress value={category.percentageOfTotal} />
-            <p>{formatCurrency(category.totalAmount)}</p>
-          </div>
-        ))}
+          ))
+        )}
       </CardContent>
     </ScrollArea>
   );

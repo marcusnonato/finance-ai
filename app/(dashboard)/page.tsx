@@ -31,6 +31,8 @@ const Home = async ({ searchParams }: HomeProps) => {
   const dashboard = await getDashboard(month);
   const uerCanAddTransaction = await canUserAddTransaction();
 
+  console.log(dashboard);
+
   return (
     <>
       <NavBar />

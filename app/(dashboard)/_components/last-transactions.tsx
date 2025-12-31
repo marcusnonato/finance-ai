@@ -40,68 +40,43 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
         <Separator className="my-4" />
       </div>
       <CardContent className="space-y-6">
-        {lastTransactions.map((transaction) => (
-          <div
-            key={transaction.id}
-            className="flex items-center justify-between"
-          >
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-white/5 p-3 text-white">
-                <Image
-                  src={`/${TRANSACTION_PAYMENT_METHOD_ICONS[transaction.paymentMethod]}`}
-                  height={20}
-                  width={20}
-                  alt="Icon"
-                />
+        {lastTransactions.length === 0 ? (
+          <p className="text-muted-foreground text-center py-8">
+            Nenhuma transação encontrada neste período.
+          </p>
+        ) : (
+          lastTransactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="flex items-center justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-white/5 p-3 text-white">
+                  <Image
+                    src={`/${TRANSACTION_PAYMENT_METHOD_ICONS[transaction.paymentMethod]}`}
+                    height={20}
+                    width={20}
+                    alt="Icon"
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">{transaction.name}</p>
+                  <p className="text-muted-foreground text-sm">
+                    {new Date(transaction.date).toLocaleDateString("pt-BR", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-bold">{transaction.name}</p>
-                <p className="text-muted-foreground text-sm">
-                  {new Date(transaction.date).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
-              </div>
+              <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
+                {getAmountPrefix(transaction)}
+                {formatCurrency(Number(transaction.amount))}
+              </p>
             </div>
-            <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
-              {getAmountPrefix(transaction)}
-              {formatCurrency(Number(transaction.amount))}
-            </p>
-          </div>
-        ))}
-        {lastTransactions.map((transaction) => (
-          <div
-            key={transaction.id}
-            className="flex items-center justify-between"
-          >
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-white/5 p-3 text-white">
-                <Image
-                  src={`/${TRANSACTION_PAYMENT_METHOD_ICONS[transaction.paymentMethod]}`}
-                  height={20}
-                  width={20}
-                  alt="Icon"
-                />
-              </div>
-              <div>
-                <p className="text-sm font-bold">{transaction.name}</p>
-                <p className="text-muted-foreground text-sm">
-                  {new Date(transaction.date).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
-              </div>
-            </div>
-            <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
-              {getAmountPrefix(transaction)}
-              {formatCurrency(Number(transaction.amount))}
-            </p>
-          </div>
-        ))}
+          ))
+        )}
       </CardContent>
     </ScrollArea>
   );
