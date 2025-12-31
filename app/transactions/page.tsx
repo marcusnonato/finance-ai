@@ -25,9 +25,9 @@ const TransactionsPage = async () => {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <NavBar />
-      <div className="flex flex-1 flex-col space-y-6 overflow-hidden p-6">
-        <div className="flex w-full items-center justify-between">
-          <h1 className="text-2xl font-bold">Transações</h1>
+      <div className="flex flex-1 flex-col space-y-4 overflow-hidden p-4 md:space-y-6 md:p-6">
+        <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-xl font-bold md:text-2xl">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         </div>
         <div className="flex-1 overflow-hidden">
